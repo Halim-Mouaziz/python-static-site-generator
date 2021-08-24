@@ -1,7 +1,7 @@
-from Path import pathlib
+from pathlib import Path
 import os
 
-class Class:
+class Site:
 
     def __init__(self, source, dest):
         self.source = source.Path()
