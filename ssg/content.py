@@ -5,7 +5,7 @@ from collections.abc import Mapping
 
 class Content(Mapping):
     __delimiter = r"^(?:-|\+){3}\s*$"
-    __regex = re.compile(__delimeter, re.__MULTILINE)
+    __regex = re.compile(__delimiter, re.__MULTILINE)
 
     @classmethod
     def load(cls, string):
