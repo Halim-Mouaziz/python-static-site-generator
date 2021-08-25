@@ -7,14 +7,15 @@ class Content(Mapping):
     __delimeter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimeter, re.__MULTILINE)
 
-    def load(self, cls, string):
-        _, fm,content = __regex.split(string, 2)
-        load(fm, Loader = FullLoader)
+    @classmethod
+    def load(cls, string):
+        _, fm,content = cls.__regex.split(string, 2)
+        metadata = load(fm, Loader = FullLoader)
         return cls(metadata, content)
 
     def __init__(self, metadata, content):
         self.data = metadata
-        content = {"content" : content, }
+        self.data["content"] = content
 
     @property
     def body(self):
@@ -35,12 +36,12 @@ class Content(Mapping):
         return self.data.__iter__()
 
     def __len__(self):
-        return self.data.__len__()
+        return len(self.data)
 
     def __repr__(self):
         data = {}
         for key, value in self.data.items():
-            if key is not "content":
+            if key != "content":
                 data[key] = value 
         return str(data)
 
